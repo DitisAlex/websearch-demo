@@ -17,7 +17,7 @@ function App() {
   const isLoading = gpt41.isLoading || gpt52.isLoading;
 
   return (
-    <div className="flex h-screen flex-col bg-gray-100 p-6">
+    <div className="flex min-h-screen flex-col bg-gray-100 p-6">
       <div className="mb-6">
         <h1 className="text-xl font-bold text-gray-900 mb-4">
           Web Search Demo — GPT-4.1 vs GPT-5.2

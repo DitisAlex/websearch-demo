@@ -23,14 +23,14 @@ function estimateCost(model: string, inputTokens: number, outputTokens: number):
   return `\u20AC${cost.toFixed(4)}`;
 }
 
-function StatsBar({ stats, isLoading, model }: { stats: Stats; isLoading: boolean; model: string }) {
+function StatsInline({ stats, isLoading, model }: { stats: Stats; isLoading: boolean; model: string }) {
   const { timeToFirstToken, totalTime, tokensPerSecond, usage } = stats;
   const hasStats = timeToFirstToken !== null || totalTime !== null || usage !== null;
 
   if (!hasStats && !isLoading) return null;
 
   return (
-    <div className="flex flex-wrap gap-x-4 gap-y-1 border-t border-gray-200 bg-gray-50 px-4 py-2 text-[11px] text-gray-500">
+    <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-gray-500">
       {timeToFirstToken !== null && (
         <span>TTFT: <span className="font-medium text-gray-700">{timeToFirstToken.toFixed(2)}s</span></span>
       )}
@@ -58,9 +58,12 @@ function StatsBar({ stats, isLoading, model }: { stats: Stats; isLoading: boolea
 export function ResultPanel({ title, subtitle, model, state }: Props) {
   return (
     <div className="flex flex-1 flex-col rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">
-      <div className="border-b border-gray-200 bg-gray-50 px-4 py-3">
-        <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
-        <p className="text-xs text-gray-500">{subtitle}</p>
+      <div className="flex items-start justify-between border-b border-gray-200 bg-gray-50 px-4 py-3">
+        <div>
+          <h2 className="text-sm font-semibold text-gray-800">{title}</h2>
+          <p className="text-xs text-gray-500">{subtitle}</p>
+        </div>
+        <StatsInline stats={state.stats} isLoading={state.isLoading} model={model} />
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 text-sm text-gray-800">
@@ -116,7 +119,6 @@ export function ResultPanel({ title, subtitle, model, state }: Props) {
         )}
       </div>
 
-      <StatsBar stats={state.stats} isLoading={state.isLoading} model={model} />
     </div>
   );
 }

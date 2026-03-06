@@ -10,7 +10,7 @@ interface Props {
 
 export function ComparisonView({ gpt41Model, gpt52Model, gpt41State, gpt52State }: Props) {
   return (
-    <div className="flex flex-1 gap-4 min-h-0">
+    <div className="flex flex-1 gap-4 min-h-[500px]">
       <ResultPanel
         title="GPT-4.1"
         subtitle="Non-thinking"
